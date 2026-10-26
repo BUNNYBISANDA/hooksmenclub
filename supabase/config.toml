@@ -1,0 +1,37 @@
+project_id = "hook-menclub"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://127.0.0.1:5173"]
+enable_signup = false
+
+# Guest endpoints perform their own validation, Turnstile and rate limiting.
+[functions.catalog]
+verify_jwt = false
+[functions.availability]
+verify_jwt = false
+[functions.create-booking]
+verify_jwt = false
+[functions.manage-booking]
+verify_jwt = false
