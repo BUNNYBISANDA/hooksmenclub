@@ -57,5 +57,5 @@ function Pages() {
 export function App() {
   const [history]=useState(()=>createPrivateHistory(window));
   const location=useSyncExternalStore(history.subscribe,history.getSnapshot);
-  return <Router location={location} navigator={history.navigator}><Pages/></Router>;
+  return <Router basename={import.meta.env.BASE_URL.replace(/\/$/, '') || '/'} location={location} navigator={history.navigator}><Pages/></Router>;
 }

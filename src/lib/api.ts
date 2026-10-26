@@ -51,7 +51,7 @@ function lazyFixtureApi(): CustomerApi {
     rescheduleBooking: async (...args) => (await load()).rescheduleBooking(...args),
   };
 }
-export const customerApi: CustomerApi = import.meta.env.DEV && import.meta.env.VITE_API_MODE === 'fixtures' ? lazyFixtureApi() : liveApi;
+export const customerApi: CustomerApi = (import.meta.env.DEV || import.meta.env.VITE_DEMO_BUILD === '1') && import.meta.env.VITE_API_MODE === 'fixtures' ? lazyFixtureApi() : liveApi;
 
 /** Rescheduling uses original snapshots and excludes only the authenticated customer's own booking. */
 export function withManagedAvailability(api:CustomerApi,management:ManageBookingRequest):CustomerApi {
